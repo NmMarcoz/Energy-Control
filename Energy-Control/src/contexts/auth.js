@@ -14,19 +14,22 @@ function AuthProvider ({children}){
     function userByToken(token, email){
       fetch("https://25d6-2804-d4b-4200-9600-84e7-6bfb-5103-ddc4.ngrok-free.app/auth/token",{
         method:"POST",
+        headers:{
+          'Content-Type': 'application/json'
+        },
         body:JSON.stringify({
           token: token
         }),
       }).then(res=>{
-        console.log("token do authtoken é:" +token)
         const statusCode = res.status
         const data = res.json();
         return Promise.all([statusCode, data])
       }).then((res, data)=>{
         console.log(res, data)
+        const username = res[1].user.username
         setUser({
           email:email,
-          user: res.username
+          user: username
         })
       })
     }
@@ -63,7 +66,7 @@ function AuthProvider ({children}){
         }
        
       return(
-        <AuthContext.Provider value={{nome:"Alohomora", entrar}}>
+        <AuthContext.Provider value={{nome:"Fulano", entrar, userByToken, user}}>
           {children}
         </AuthContext.Provider>
       )

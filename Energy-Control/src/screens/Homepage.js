@@ -8,7 +8,7 @@ import { useContext } from 'react';
 
 
 const Login =()=>{
-  const {nome} = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
   const navigation = useNavigation(); 
   return( 
     //Safe area
@@ -23,7 +23,7 @@ const Login =()=>{
                   vindo.
                 </Text>
                 <Text style={styles.subTextHeaderWhite}>
-                  {nome}
+                  {user.user}
                 </Text>
               </View>
         </View>

@@ -33,10 +33,14 @@ const login = async (req, res) =>{
 
 const userByToken = async(req, res)=>{
   const{token} = req.body
+  console.log(token)
   try{
     jwt.verify(token, process.env.JWT_SECRET, async(erro, decoder) =>{
       if(erro){
-        return res.status(401).send({message: "Token inválido"})
+        return( res.status(401).send({message: "Token inválido"}),
+        console.log("Token inválido"),
+        console.log("Seu token foi:" + token)
+       )
       }
       console.log(decoder)
       const user = await userService.findById(decoder.id)
