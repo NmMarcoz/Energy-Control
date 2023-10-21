@@ -36,9 +36,9 @@ const findAll = async (req, res) =>{
         if(users.length === 0){
             return res.status(400).send({message: "Não tem usuários cadastrados"})
         }
-        res.status(200).send(users)
+        return res.status(200).send(users)
     }catch(erro){
-        res.status(500).send({message: erro.message})
+        return res.status(500).send({message: erro.message})
     }
 }
 
@@ -50,7 +50,20 @@ const findById = async (req, res) =>{
         }
         return res.status(200).send({user})
     }catch(erro){
-        res.status(500).send({message: erro.message})
+       return res.status(500).send({message: erro.message})
+    }
+}
+
+const findByIdAlternative = async (req, res) =>{
+    try{
+        const {id} = req.body
+        const user = await userService.findById(id)
+        if(!user){
+            return res.status(401).send({message: "Não existem usuários com este ID"})
+        }
+        return res.status(200).send({user})
+    }catch(erro){
+       return res.status(500).send({message: erro.message})
     }
 }
 
@@ -59,5 +72,6 @@ const findById = async (req, res) =>{
 export default {
     create,
     findAll,
-    findById
+    findById,
+    findByIdAlternative
 }

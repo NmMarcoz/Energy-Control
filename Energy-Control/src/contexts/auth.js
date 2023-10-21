@@ -15,7 +15,8 @@ function AuthProvider ({children}){
       fetch("https://25d6-2804-d4b-4200-9600-84e7-6bfb-5103-ddc4.ngrok-free.app/auth/token",{
         method:"POST",
         headers:{
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body:JSON.stringify({
           token: token

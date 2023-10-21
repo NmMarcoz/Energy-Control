@@ -19,7 +19,7 @@ const EspSchema = new mongoose.Schema({
     required: false,
   },
   consumo:{
-    type: int,
+    type: Number,
     required: true,
     default: 1,
   }
